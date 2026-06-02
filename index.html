@@ -1431,7 +1431,7 @@
     </section>
 
     <footer>
-      <p>&copy; 2024 Nicolas Prasetia H. Batubara. All rights reserved.</p>
+      <p id="footerCopyright"></p>
     </footer>
 
     <script>
@@ -1471,6 +1471,12 @@
       document.querySelectorAll(".fade-in").forEach((el) => {
         observer.observe(el);
       });
+
+      const footerCopyright = document.getElementById("footerCopyright");
+      if (footerCopyright) {
+        const currentYear = new Date().getFullYear();
+        footerCopyright.innerHTML = `&copy; ${currentYear} Nicolas Prasetia H. Batubara. All rights reserved.`;
+      }
     </script>
   </body>
 </html>
