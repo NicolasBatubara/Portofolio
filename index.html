@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 🎨 BAGIAN YANG BISA DIUBAH: Title dan Meta -->
+    <!-- Title dan Meta -->
     <title>Nicolas Prasetia H. Batubara | Portofolio Professional</title>
     <meta
       name="description"
@@ -1108,12 +1108,64 @@
         .hamburger {
           display: flex;
         }
+        #home {
+          padding: 88px 1rem 3rem;
+        }
         .hero-inner {
           grid-template-columns: 1fr;
-          gap: 2rem;
+          gap: 1.6rem;
+          align-items: start;
+        }
+        .hero-inner > div:first-child {
+          width: 100%;
+          min-width: 0;
         }
         .hero-avatar {
-          display: none;
+          display: block;
+          justify-self: center;
+          grid-row: 1;
+          margin: 0 auto 0.25rem;
+          order: -1;
+        }
+        .hero-avatar img {
+          width: 132px;
+          height: 132px;
+        }
+        .hero-tag,
+        h1 {
+          text-align: center;
+          justify-content: center;
+        }
+        .hero-tag {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        h1 {
+          font-size: clamp(2.15rem, 11vw, 3rem);
+          word-break: normal;
+          line-height: 1.05;
+        }
+        .hero-desc {
+          max-width: 100%;
+          font-size: 0.96rem;
+        }
+        .hero-meta {
+          gap: 0.9rem;
+          margin-bottom: 1.8rem;
+        }
+        .hero-btns {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .btn-primary,
+        .btn-outline {
+          width: 100%;
+          justify-content: center;
+        }
+        .hero-focus {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 1.5rem;
         }
         .about-grid {
           grid-template-columns: 1fr;
@@ -1125,7 +1177,7 @@
     </style>
   </head>
   <body>
-    <!-- 🎨 NAVBAR - UBAH NAMA/LOGO -->
+    <!-- 🎨 NAVBAR - NAMA/LOGO -->
     <nav>
       <div class="nav-logo">NPH</div>
       <div class="nav-actions">
@@ -1170,7 +1222,7 @@
       <a href="#contact">Contact</a>
     </div>
 
-    <!-- 🎨 HERO SECTION - UBAH NAMA, DESKRIPSI, FOTO, LINK -->
+    <!-- 🎨 HERO SECTION - NAMA, DESKRIPSI, FOTO, LINK -->
     <section id="home">
       <div class="hero-bg"></div>
       <div class="hero-inner">
@@ -1211,7 +1263,7 @@
       </div>
     </section>
 
-    <!-- 🎨 ABOUT SECTION - UBAH DESKRIPSI -->
+    <!-- 🎨 ABOUT SECTION - DESKRIPSI -->
     <section id="about">
       <div class="container">
         <div class="section-label">About Me</div>
@@ -1303,7 +1355,7 @@
       </div>
     </section>
 
-    <!-- 🎨 PROJECTS SECTION - UBAH PROJECT ANDA -->
+    <!-- 🎨 PROJECTS SECTION - PROJECT ANDA -->
     <section id="projects">
       <div class="container">
         <div class="section-label">Portfolio</div>
@@ -1511,7 +1563,7 @@
       </div>
     </section>
 
-    <!-- 🎨 CALL TO ACTION - UBAH TEKS DAN LINK -->
+    <!-- 🎨 CALL TO ACTION - TEKS DAN LINK -->
     <section id="recruiter">
       <div class="recruiter-inner">
         <h2>Looking for a talented <em>developer</em>?</h2>
@@ -1533,7 +1585,7 @@
       </div>
     </section>
 
-    <!-- 🎨 CONTACT SECTION - UBAH LINK KONTAK -->
+    <!-- 🎨 CONTACT SECTION - LINK KONTAK -->
     <section id="contact">
       <div class="contact-inner">
         <div class="section-label">Get in Touch</div>
