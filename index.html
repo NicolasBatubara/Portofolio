@@ -20,9 +20,18 @@
     />
     <meta
       property="og:image"
-      content="https://avatars.githubusercontent.com/u/149557624?v=4"
+      content="https://avatars.githubusercontent.com/u/149449407?v=4"
+    />
+    <meta
+      property="og:image:alt"
+      content="Nicolas Prasetia H. Batubara"
     />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://avatars.githubusercontent.com/u/149449407?v=4"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,6 +39,17 @@
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
       rel="stylesheet"
     />
+
+    <script>
+      (function () {
+        const storedTheme = localStorage.getItem("theme");
+        const prefersLight =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: light)").matches;
+        const theme = storedTheme || (prefersLight ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
 
     <style>
       :root {
@@ -47,9 +67,45 @@
         --accent2: #9f7aea;
         --accent3: #68d391;
         --accent-glow: rgba(99, 179, 237, 0.15);
+        --nav-bg: rgba(10, 10, 15, 0.85);
+        --mobile-menu-bg: rgba(10, 10, 15, 0.97);
+        --recruiter-bg: linear-gradient(
+          135deg,
+          #0d1117 0%,
+          #111827 50%,
+          #0a0a0f 100%
+        );
+        --recruiter-glow-1: rgba(99, 179, 237, 0.08);
+        --recruiter-glow-2: rgba(159, 122, 234, 0.06);
         --font-head: "Syne", sans-serif;
         --font-mono: "DM Mono", monospace;
         --font-body: "DM Sans", sans-serif;
+      }
+
+      html[data-theme="light"] {
+        --bg: #f6f8fc;
+        --bg2: #ffffff;
+        --bg3: #eef2f8;
+        --card: #ffffff;
+        --border: rgba(15, 23, 42, 0.08);
+        --border-hover: rgba(37, 99, 235, 0.28);
+        --text: #101828;
+        --text-muted: #475467;
+        --text-dim: #667085;
+        --accent: #2563eb;
+        --accent2: #7c3aed;
+        --accent3: #059669;
+        --accent-glow: rgba(37, 99, 235, 0.08);
+        --nav-bg: rgba(255, 255, 255, 0.88);
+        --mobile-menu-bg: rgba(246, 248, 252, 0.98);
+        --recruiter-bg: linear-gradient(
+          135deg,
+          #eef2ff 0%,
+          #f8fafc 50%,
+          #e2e8f0 100%
+        );
+        --recruiter-glow-1: rgba(37, 99, 235, 0.08);
+        --recruiter-glow-2: rgba(124, 58, 237, 0.06);
       }
 
       *,
@@ -70,6 +126,9 @@
         font-size: 15px;
         line-height: 1.7;
         overflow-x: hidden;
+        transition:
+          background-color 0.25s ease,
+          color 0.25s ease;
       }
 
       body::before {
@@ -103,9 +162,14 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: rgba(10, 10, 15, 0.85);
+        background: var(--nav-bg);
         backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--border);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
       }
       .nav-logo {
         font-family: var(--font-head);
@@ -129,6 +193,66 @@
       }
       .nav-links a:hover {
         color: var(--accent);
+      }
+
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        user-select: none;
+        cursor: pointer;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+      }
+      .theme-toggle input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .theme-toggle-track {
+        width: 46px;
+        height: 26px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--card), var(--bg3));
+        border: 1px solid var(--border);
+        padding: 3px;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.25s ease;
+      }
+      .theme-toggle-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transform: translateX(0);
+        transition: transform 0.25s ease, background 0.25s ease;
+      }
+      .theme-toggle input:checked + .theme-toggle-track .theme-toggle-thumb {
+        transform: translateX(20px);
+        background: var(--accent3);
+      }
+      .theme-icon {
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        flex: 0 0 auto;
+      }
+      .theme-icon svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+        fill: none;
+      }
+      .theme-toggle:hover .theme-toggle-track {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-glow);
       }
 
       .hamburger {
@@ -275,7 +399,7 @@
         gap: 0.5rem;
         padding: 0.7rem 1.6rem;
         background: var(--accent);
-        color: #0a0a0f;
+        color: #f8fafc;
         font-family: var(--font-head);
         font-weight: 700;
         font-size: 0.82rem;
@@ -286,6 +410,7 @@
       }
       .btn-primary:hover {
         background: #90cdf4;
+        color: #ffffff;
         transform: translateY(-1px);
         box-shadow: 0 8px 24px rgba(99, 179, 237, 0.25);
       }
@@ -802,12 +927,7 @@
 
       /* ─── RECRUITER ─── */
       #recruiter {
-        background: linear-gradient(
-          135deg,
-          #0d1117 0%,
-          #111827 50%,
-          #0a0a0f 100%
-        );
+        background: var(--recruiter-bg);
         position: relative;
         overflow: hidden;
       }
@@ -818,12 +938,12 @@
         background:
           radial-gradient(
             ellipse at 20% 50%,
-            rgba(99, 179, 237, 0.08) 0%,
+            var(--recruiter-glow-1) 0%,
             transparent 60%
           ),
           radial-gradient(
             ellipse at 80% 50%,
-            rgba(159, 122, 234, 0.06) 0%,
+            var(--recruiter-glow-2) 0%,
             transparent 60%
           );
       }
@@ -930,7 +1050,7 @@
         position: fixed;
         inset: 0;
         z-index: 99;
-        background: rgba(10, 10, 15, 0.97);
+        background: var(--mobile-menu-bg);
         backdrop-filter: blur(20px);
         flex-direction: column;
         align-items: center;
@@ -979,6 +1099,12 @@
         .nav-links {
           display: none;
         }
+        .nav-actions {
+          gap: 0.6rem;
+        }
+        .theme-toggle .theme-text {
+          display: none;
+        }
         .hamburger {
           display: flex;
         }
@@ -1002,18 +1128,37 @@
     <!-- 🎨 NAVBAR - UBAH NAMA/LOGO -->
     <nav>
       <div class="nav-logo">NPH</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav-actions">
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <label class="theme-toggle" for="themeToggle">
+          <span class="theme-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M20.5 14.5a8.5 8.5 0 1 1-11-11 7 7 0 1 0 11 11Z" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" />
+            </svg>
+          </span>
+          <input type="checkbox" id="themeToggle" aria-label="Toggle theme" title="Toggle theme" />
+          <span class="theme-toggle-track" aria-hidden="true">
+            <span class="theme-toggle-thumb"></span>
+          </span>
+          <span class="theme-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4.25" />
+              <path d="M12 2.75v2.5M12 18.75v2.5M4.98 4.98l1.77 1.77M17.25 17.25l1.77 1.77M2.75 12h2.5M18.75 12h2.5M4.98 19.02l1.77-1.77M17.25 6.75l1.77-1.77" stroke-width="1.7" stroke-linecap="round" />
+            </svg>
+          </span>
+        </label>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
@@ -1052,7 +1197,7 @@
         </div>
         <div class="hero-avatar">
           <img
-            src="https://avatars.githubusercontent.com/u/149449407?s"
+            src="https://avatars.githubusercontent.com/u/149449407?v=4"
             alt="Profile Photo"
           />
         </div>
@@ -1435,6 +1580,27 @@
     </footer>
 
     <script>
+      const themeToggle = document.getElementById("themeToggle");
+      const savedTheme = localStorage.getItem("theme");
+      const currentTheme =
+        savedTheme || document.documentElement.getAttribute("data-theme") || "dark";
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        if (themeToggle) {
+          themeToggle.checked = theme === "light";
+        }
+        localStorage.setItem("theme", theme);
+      }
+
+      applyTheme(currentTheme);
+
+      if (themeToggle) {
+        themeToggle.addEventListener("change", () => {
+          applyTheme(themeToggle.checked ? "light" : "dark");
+        });
+      }
+
       // Mobile menu toggle
       const hamburger = document.getElementById("hamburger");
       const mobileMenu = document.getElementById("mobileMenu");
